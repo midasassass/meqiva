@@ -1,0 +1,266 @@
+@import "tailwindcss";
+/* Self-hosted from npm: the build needs no network and the first paint needs no third party. */
+@import "@fontsource-variable/plus-jakarta-sans/wght.css";
+@import "@fontsource-variable/fraunces/soft.css";
+
+/*
+  MEQIVA tokens — see DESIGN.md.
+
+  Electric blue carries action and trust and is what a garage overrides with its own
+  colour. Marigold is the accent and means one thing: this is worth your attention.
+  Depth comes from soft layered shadow rather than heavy borders, which is most of
+  what makes the product feel approachable rather than clinical.
+*/
+:root {
+  --bg: #fbfcfe;
+  --surface: #ffffff;
+  --surface-2: #f3f6fb;
+  --ink: #171b2e;
+  --ink-2: #646d84;
+  --ink-3: #959cb0;
+  --line: #eaeef7;
+  --line-strong: #d6ddeb;
+
+  /* Brand — overridden per garage by a scoped wrapper. */
+  --brand: #3760ff;
+  --brand-fg: #ffffff;
+  --brand-hover: #2a4ff0;
+  --brand-soft: #edf1ff;
+
+  --accent: #ffa726;
+  --accent-fg: #492a00;
+  --accent-soft: #fff5e6;
+
+  --success: #12a87d;
+  --success-soft: #e6f9f2;
+  --warn: #c77700;
+  --warn-soft: #fff6e8;
+  --danger: #de3b3b;
+  --danger-soft: #fef0f0;
+
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r: 14px;
+  --r-lg: 20px;
+
+  --shadow-1: 0 1px 2px rgb(23 27 46 / 0.04), 0 1px 3px rgb(23 27 46 / 0.03);
+  --shadow-2: 0 2px 4px rgb(23 27 46 / 0.03), 0 8px 22px -8px rgb(23 27 46 / 0.08);
+  --shadow-3: 0 4px 10px rgb(23 27 46 / 0.04), 0 20px 48px -14px rgb(23 27 46 / 0.14);
+  --shadow-brand: 0 4px 14px -4px color-mix(in oklab, var(--brand) 42%, transparent);
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #090c16;
+    --surface: #121728;
+    --surface-2: #1b2235;
+    --ink: #eef1f8;
+    --ink-2: #9ba5bd;
+    --ink-3: #6f7891;
+    --line: #242c41;
+    --line-strong: #3a4460;
+    --brand: #6d8bff;
+    --brand-fg: #070a14;
+    --brand-hover: #8aa2ff;
+    --brand-soft: #1b2546;
+    --accent: #ffb04d;
+    --accent-fg: #2a1800;
+    --accent-soft: #31250f;
+    --success: #35d6a4;
+    --success-soft: #0e3329;
+    --warn: #f0b354;
+    --warn-soft: #322512;
+    --danger: #ff6b6b;
+    --danger-soft: #3a1818;
+    --shadow-1: 0 1px 2px rgb(0 0 0 / 0.45);
+    --shadow-2: 0 2px 4px rgb(0 0 0 / 0.35), 0 8px 22px -6px rgb(0 0 0 / 0.55);
+    --shadow-3: 0 4px 10px rgb(0 0 0 / 0.35), 0 22px 54px -12px rgb(0 0 0 / 0.65);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #090c16;
+  --surface: #121728;
+  --surface-2: #1b2235;
+  --ink: #eef1f8;
+  --ink-2: #9ba5bd;
+  --ink-3: #6f7891;
+  --line: #242c41;
+  --line-strong: #3a4460;
+  --brand: #6d8bff;
+  --brand-fg: #070a14;
+  --brand-hover: #8aa2ff;
+  --brand-soft: #1b2546;
+  --accent: #ffb04d;
+  --accent-fg: #2a1800;
+  --accent-soft: #31250f;
+  --success: #35d6a4;
+  --success-soft: #0e3329;
+  --warn: #f0b354;
+  --warn-soft: #322512;
+  --danger: #ff6b6b;
+  --danger-soft: #3a1818;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink-2);
+  --color-ink3: var(--ink-3);
+  --color-muted: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-brand: var(--brand);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-soft: var(--brand-soft);
+  --color-primary: var(--brand);
+  --color-primary-fg: var(--brand-fg);
+
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+
+  --radius-xs: var(--r-xs);
+  --radius-sm2: var(--r-sm);
+  --radius-card: var(--r);
+  --radius-panel: var(--r-lg);
+
+  --shadow-soft: var(--shadow-1);
+  --shadow-card: var(--shadow-2);
+  --shadow-float: var(--shadow-3);
+}
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+* { -webkit-tap-highlight-color: transparent; }
+
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 6px; }
+
+/* Money, and any figure a person compares down a column. */
+.tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/*
+  Fraunces on its SOFT axis — rounded terminals, warm rather than severe. Display sizes
+  only; every control and every number stays in the sans.
+*/
+.display, .display-2, .display-3 {
+  font-family: "Fraunces Variable", Georgia, serif;
+  font-variation-settings: "SOFT" 60, "WONK" 0;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+.display   { font-size: clamp(2.6rem, 6.2vw, 4.3rem); line-height: 1.03; letter-spacing: -0.028em; }
+.display-2 { font-size: clamp(1.75rem, 3.4vw, 2.5rem); line-height: 1.14; }
+.display-3 { font-size: clamp(1.0625rem, 1.5vw, 1.2rem); line-height: 1.3; letter-spacing: -0.01em; }
+
+.headline { font-size: clamp(1.25rem, 2vw, 1.55rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+
+.prose-read { font-size: 1.0625rem; line-height: 1.72; max-width: 68ch; }
+.prose-read p + p { margin-top: 1.1em; }
+.prose-read strong { font-weight: 700; }
+
+/* Dotted leader, as on a printed bill. Estimates and invoices only. */
+.leader { display: flex; align-items: baseline; gap: 0.5rem; }
+.leader > :first-child { flex: 0 1 auto; }
+.leader::after {
+  content: "";
+  flex: 1 1 auto;
+  min-width: 1.5rem;
+  align-self: flex-end;
+  margin-bottom: 0.32em;
+  border-bottom: 1px dotted var(--line-strong);
+}
+.leader > :last-child { flex: 0 0 auto; }
+
+/* ---------- Depth and response ---------- */
+.press { transition: transform 0.18s var(--ease), box-shadow 0.22s var(--ease), background-color 0.18s var(--ease); }
+.press:active { transform: scale(0.975); }
+.lift { transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease); }
+.lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-3); }
+
+/* ---------- Motion ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pop { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 55%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 12px transparent; }
+}
+
+/* One orchestrated entrance per view. Children stagger with --i. */
+.rise { animation: rise 0.55s var(--ease) both; animation-delay: calc(var(--i, 0) * 65ms); }
+.fade { animation: fadeIn 0.5s var(--ease) both; animation-delay: calc(var(--i, 0) * 65ms); }
+.pop  { animation: pop 0.28s var(--ease) both; }
+.attention { animation: pulseRing 2.4s ease-out infinite; }
+
+/* A figure that just changed catches the eye once, without shifting the layout. */
+@keyframes tick { 0% { color: var(--brand); transform: translateY(-1px); } 100% { color: inherit; transform: none; } }
+.ticked { animation: tick 0.65s var(--ease); display: inline-block; }
+
+.skeleton { position: relative; overflow: hidden; background: var(--surface-2); border-radius: var(--r-xs); }
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--ink) 6%, transparent), transparent);
+  animation: shimmer 1.45s infinite;
+}
+
+/* The only gradient in the product: a restrained wash behind the hero. */
+.glow { position: relative; isolation: isolate; }
+.glow::before {
+  content: "";
+  position: absolute;
+  inset: -25% -10% auto -10%;
+  height: 560px;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 50% at 20% 30%, color-mix(in oklab, var(--brand) 15%, transparent), transparent 70%),
+    radial-gradient(36% 44% at 84% 14%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 70%);
+  filter: blur(10px);
+}
+
+dialog::backdrop { background: color-mix(in oklab, var(--ink) 50%, transparent); backdrop-filter: blur(3px); }
+dialog { color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .lift:hover, .press:active { transform: none; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}
